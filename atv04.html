@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscrição - Semana de Tecnologia IFAL</title>
+</head>
+<body>
+
+    <h1>Semana de Tecnologia IFAL - Inscrição</h1>
+
+    <form action="https://httpbin.org/post" method="post" enctype="multipart/form-data">
+
+        <input type="hidden" name="edicao" value="2026">
+
+        <fieldset>
+            <legend>Identificação do Participante</legend>
+
+            <p>
+                <label for="txt-nome">Nome completo:</label>
+                <input type="text" id="txt-nome" name="nome" required>
+            </p>
+
+            <p>
+                <label for="txt-email">E-mail institucional:</label>
+                <input type="email" id="txt-email" name="email" required>
+            </p>
+
+            <p>
+                <label for="txt-cidade">Cidade de origem:</label>
+                <input type="text" id="txt-cidade" name="cidade" list="cidades-alagoas">
+                
+                <datalist id="cidades-alagoas">
+                    <option value="Maceió">
+                    <option value="Arapiraca">
+                    <option value="Palmeira dos Índios">
+                    <option value="Rio Largo">
+                    <option value="Penedo">
+                    <option value="União dos Palmares">
+                    <option value="Delmiro Gouveia">
+                    <option value="Santana do Ipanema">
+                </datalist>
+            </p>
+
+            <p>
+                <label for="file-foto">Foto para crachá:</label>
+                <input type="file" id="file-foto" name="foto" accept="image/jpeg,image/png" aria-describedby="instrucao-foto">
+                <br>
+                <small id="instrucao-foto">Formatos aceitos: JPG e PNG. Tamanho máximo: 2 MB.</small>
+            </p>
+        </fieldset>
+
+        <br>
+
+        <fieldset>
+            <legend>Preferências para o Evento</legend>
+
+            <p>
+                <label for="date-chegada">Data e hora preferida para chegada:</label>
+                <input type="datetime-local" id="date-chegada" name="chegada">
+            </p>
+
+            <p>
+                <label for="experiencia">
+                    Nível de experiência: <span id="valor-experiencia">5</span>/10
+                </label>
+                <br>
+                <input type="range" id="experiencia" name="experiencia" min="0" max="10" step="1" value="5" oninput="document.getElementById('valor-experiencia').textContent = this.value">
+            </p>
+
+            <p>
+                <label for="color-camiseta">Cor de preferência para a camiseta:</label>
+                <input type="color" id="color-camiseta" name="cor_camiseta" value="#1a73e8">
+            </p>
+
+            <p>
+                <label for="sel-oficinas">Oficinas de interesse:</label>
+                <br>
+                <select id="sel-oficinas" name="oficinas[]" multiple size="4" aria-describedby="instrucao-oficinas">
+                    <option value="web_html_css">Desenvolvimento Web com HTML5 e CSS3</option>
+                    <option value="intro_python">Introdução à Linguagem Python</option>
+                    <option value="banco_dados">Modelagem de Bancos de Dados SQL</option>
+                    <option value="iot_arduino">Internet das Coisas (IoT) com Arduino</option>
+                    <option value="git_github">Controle de Versão com Git e GitHub</option>
+                </select>
+                <br>
+                <small id="instrucao-oficinas">Use Ctrl (ou Cmd no Mac) para selecionar mais de uma oficina.</small>
+            </p>
+        </fieldset>
+
+        <br>
+
+        <p>
+            <button type="submit">Confirmar inscrição</button>
+        </p>
+
+    </form>
+
+</body>
+</html>
