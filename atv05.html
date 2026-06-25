@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Pesquisa de Perfil</title>
+</head>
+<body>
+
+    <h1>Pesquisa de Perfil Acadêmico</h1>
+
+    <form action="https://httpbin.org/post" method="post" novalidate>
+
+        <input type="hidden" name="pesquisa_id" value="PWEB1-2026-1">
+
+        <fieldset>
+            <legend>Perfil</legend>
+            <p>
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+            </p>
+            <p>
+                <label for="matricula">Matrícula (7 números):</label>
+                <input type="text" id="matricula" name="matricula" pattern="\d{7}" required>
+            </p>
+            <p>
+                <label for="email">E-mail @ifal.edu.br:</label>
+                <input type="email" id="email" name="email" required onblur="validarEmail(this)">
+                <span id="erro-email" style="color: red; display: block;"></span>
+            </p>
+            <p>
+                <label for="periodo">Período:</label>
+                <select id="periodo" name="periodo" required>
+                    <option value="">Selecione</option>
+                    <option value="1">1º Período</option>
+                    <option value="8">8º Período</option>
+                </select>
+            </p>
+            <p>
+                <label>Turno:</label>
+                <input type="radio" id="m" name="turno" value="Manhã"><label for="m">Manhã</label>
+                <input type="radio" id="n" name="turno" value="Noite"><label for="n">Noite</label>
+            </p>
+        </fieldset>
+
+        <fieldset>
+            <legend>Tecnologia</legend>
+            <p>
+                <input type="checkbox" id="t1" name="tecnologias[]" value="HTML"><label for="t1">HTML</label>
+                <input type="checkbox" id="t2" name="tecnologias[]" value="JS"><label for="t2">JavaScript</label>
+            </p>
+            <p>
+                <label for="linguagem">Linguagem Favorita:</label>
+                <select id="linguagem" name="linguagem_favorita" required>
+                    <optgroup label="Paradigma">
+                        <option value="java">Java</option>
+                        <option value="python">Python</option>
+                    </optgroup>
+                </select>
+            </p>
+            <p>
+                <label for="exp">Anos de experiência:</label>
+                <input type="number" id="exp" name="anos_experiencia" min="0" max="30" value="0">
+            </p>
+            <p>
+                <label for="url">LinkedIn:</label>
+                <input type="url" id="url" name="portfolio" placeholder="https://">
+            </p>
+        </fieldset>
+
+        <fieldset>
+            <legend>Avaliação</legend>
+            <p>
+                <label for="nota">Nota: <span id="v-nota">5</span>/10</label><br>
+                <input type="range" id="nota" name="nota_disciplina" min="0" max="10" value="5" oninput="document.getElementById('v-nota').textContent = this.value">
+            </p>
+            <p>
+                <label>Satisfação:</label>
+                <input type="radio" id="s1" name="satisfacao" value="Satisfeito"><label for="s1">Satisfeito</label
