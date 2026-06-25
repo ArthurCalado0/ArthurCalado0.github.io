@@ -1,49 +1,67 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Pesquisa de Perfil</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PWEB1 — Cap. 05 — AT05 — Pesquisa de Perfil Acadêmico</title>
 </head>
 <body>
 
-    <h1>Pesquisa de Perfil Acadêmico</h1>
+  <header>
+    <h1>Pesquisa de Perfil Acadêmico e Satisfação</h1>
+    <p><a href="../index.html">← Voltar para a página principal</a></p>
+  </header>
 
+  <main>
     <form action="https://httpbin.org/post" method="post" novalidate>
 
         <input type="hidden" name="pesquisa_id" value="PWEB1-2026-1">
 
         <fieldset>
-            <legend>Perfil</legend>
+            <legend>Perfil do Estudante</legend>
             <p>
-                <label for="nome">Nome:</label>
+                <label for="nome">Nome completo:</label>
                 <input type="text" id="nome" name="nome" required>
             </p>
             <p>
-                <label for="matricula">Matrícula (7 números):</label>
-                <input type="text" id="matricula" name="matricula" pattern="\d{7}" required>
+                <label for="matricula">Matrícula (10 números):</label>
+                <input type="text" id="matricula" name="matricula" pattern="\d{10}" required placeholder="0000000000">
             </p>
             <p>
-                <label for="email">E-mail @ifal.edu.br:</label>
-                <input type="email" id="email" name="email" required onblur="validarEmail(this)">
-                <span id="erro-email" style="color: red; display: block;"></span>
+                <label for="email">E-mail institucional: <span aria-hidden="true">*</span></label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  aria-required="true"
+                  aria-invalid="false"
+                  aria-describedby="erro-email"
+                  onblur="validarEmail(this)"
+                  required
+                />
+                <p id="erro-email" role="alert" style="color: red; margin: 5px 0 0 0;"></p>
             </p>
             <p>
-                <label for="periodo">Período:</label>
-                <select id="periodo" name="periodo" required>
+                <label for="ano_letivo">Ano / Série atual:</label>
+                <select id="ano_letivo" name="periodo" required>
                     <option value="">Selecione</option>
-                    <option value="1">1º Período</option>
-                    <option value="8">8º Período</option>
+                    <option value="1">1º Ano</option>
+                    <option value="2">2º Ano</option>
+                    <option value="3">3º Ano</option>
                 </select>
             </p>
             <p>
                 <label>Turno:</label>
                 <input type="radio" id="m" name="turno" value="Manhã"><label for="m">Manhã</label>
+                <input type="radio" id="t" name="turno" value="Tarde"><label for="t">Tarde</label>
                 <input type="radio" id="n" name="turno" value="Noite"><label for="n">Noite</label>
             </p>
         </fieldset>
 
+        <br>
+
         <fieldset>
-            <legend>Tecnologia</legend>
+            <legend>Perfil Tecnológico</legend>
             <p>
                 <input type="checkbox" id="t1" name="tecnologias[]" value="HTML"><label for="t1">HTML</label>
                 <input type="checkbox" id="t2" name="tecnologias[]" value="JS"><label for="t2">JavaScript</label>
@@ -67,12 +85,61 @@
             </p>
         </fieldset>
 
+        <br>
+
         <fieldset>
-            <legend>Avaliação</legend>
+            <legend>Avaliação da Disciplina</legend>
             <p>
-                <label for="nota">Nota: <span id="v-nota">5</span>/10</label><br>
+                <label for="nota">Nota para a disciplina: <span id="v-nota">5</span>/10</label><br>
                 <input type="range" id="nota" name="nota_disciplina" min="0" max="10" value="5" oninput="document.getElementById('v-nota').textContent = this.value">
             </p>
             <p>
                 <label>Satisfação:</label>
-                <input type="radio" id="s1" name="satisfacao" value="Satisfeito"><label for="s1">Satisfeito</label
+                <input type="radio" id="s1" name="satisfacao" value="Satisfeito"><label for="s1">Satisfeito</label>
+                <input type="radio" id="s2" name="satisfacao" value="Insatisfeito"><label for="s2">Insatisfeito</label>
+            </p>
+            <p>
+                <label for="sugestoes">Sugestões:</label><br>
+                <textarea id="sugestoes" name="sugestoes" rows="6" maxlength="1000"></textarea>
+            </p>
+            <p>
+                <label for="data">Data de preenchimento:</label>
+                <input type="date" id="data" name="data_preenchimento" required>
+            </p>
+        </fieldset>
+
+        <br>
+
+        <fieldset>
+            <legend>Consentimento e Envio</legend>
+            <p>
+                <input type="checkbox" id="consentimento" name="consentimento" required>
+                <label for="consentimento">Autorizo o uso dos meus dados para fins acadêmicos.</label>
+            </p>
+            <p>
+                <button type="submit">Enviar Pesquisa</button>
+            </p>
+        </fieldset>
+
+    </form>
+  </main>
+
+  <script>
+    // Trava a data máxima no dia de hoje automaticamente
+    document.getElementById('data').max = new Date().toISOString().split('T')[0];
+
+    // Função de validação idêntica ao exemplo fornecido
+    function validarEmail(campo) {
+      const erro = document.getElementById('erro-email');
+      if (!campo.value.endsWith('@ifal.edu.br')) {
+        erro.textContent = 'Informe seu e-mail institucional (@ifal.edu.br)';
+        campo.setAttribute('aria-invalid', 'true');
+      } else {
+        erro.textContent = '';
+        campo.setAttribute('aria-invalid', 'false');
+      }
+    }
+  </script>
+
+</body>
+</html>
